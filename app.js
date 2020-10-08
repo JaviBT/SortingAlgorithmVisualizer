@@ -122,13 +122,8 @@ function insertionSortCall() {
 function quickSortCall() {
     pivotes = [];
     quickSort(datos,0,datos.length - 1);
-    // Adds a final frame that paints the last few bars
-    todoPivotes = [];
-    for (let i=0; i<datos.length; i++) {
-        todoPivotes.push(i);
-    }
-    frames.push([datos.slice(),todoPivotes])
     animateFrames(drawQuickSort);
+    endWithGreen(datos);
 }
 
 function mergeSortCall() {
@@ -332,7 +327,6 @@ function drawInsertionSort(datos,args) {
     drawIndex(datos,[args[0],args[1]]); //args: index,color
 }
 
-// Posible error - pinta de azul la barra siguiente?
 function drawQuickSort(frame) {
     var imagen = frame[0];
     var l = imagen.length;
@@ -346,11 +340,12 @@ function drawQuickSort(frame) {
     for (let k=0; k<l; k++) {
         if (pivotes.includes(k)) {
             drawBar(currentX,barWidth,imagen[k],'green');
-        } else  if  (k === i || k === j) {
-            drawBar(currentX,barWidth,imagen[k], 'blue');
         } else {
             drawBar(currentX,barWidth,imagen[k],'silver');
         }
+        if (k === i || k === j) {
+            drawBar(currentX,barWidth,imagen[k], 'blue');
+        } 
         currentX += barWidth;
     }
 }
@@ -487,17 +482,18 @@ function partition(A, left, right) {
     while (true) {
         do {
         i += 1
-        frames.push([datos.slice(),pivotes.slice(),i,j]);
+        frames.push([datos.slice(),pivotes.slice(),i,j-1]);
         } while (A[i] < pivot)
         do {
         j -= 1
         frames.push([datos.slice(),pivotes.slice(),i,j]);
         } while (A[j] > pivot)
+
         if (i >= j) {
             return j;
         }
+
         [A[i], A[j]] = [A[j], A[i]];
-        frames.push([datos.slice(),pivotes.slice(),i,j]);
     }
 }
 // ---------------------------------------
