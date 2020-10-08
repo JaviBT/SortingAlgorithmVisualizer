@@ -84,9 +84,6 @@ runButton.addEventListener('click', () => {
         case "heapSort":
             heapSortCall();
             break;
-        case "binaryTreeSort":
-            binaryTreeSortCall();
-            break;
     }
 
     setTimeout(() => {
@@ -147,14 +144,6 @@ function heapSortCall() {
     heapSort(datos.slice());
     endWithGreen();
 }
-
-function binaryTreeSortCall() {
-    lastThrow = Date.now();
-    animationTicks = 0;
-    binaryTreeSort(datos.slice());
-    endWithGreen();
-}
-
 // ---------------------------------------------------------
 
 function drawBar(x,width,height,color) {
@@ -650,8 +639,3 @@ function drawHeapify(data, args) {
     }
 }
 // ---------------------------------------
-
-
-/*
-binary tree sort
-*/
